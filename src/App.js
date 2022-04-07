@@ -1,19 +1,26 @@
 import React from 'react'
 import { Route, Routes} from 'react-router';
+import { Divider } from '@material-ui/core';
+
+
 import './App.css';
-import ResponsiveAppBar from "./components/Nav";
-import Home from './components/Home';
-import Products from './components/Products';
-import Pricing from './components/Pricing';
-import Location from './components/Location';
+import ResponsiveAppBar from "./components/Header/Nav";
+import Home from './components/Header/Home';
+import Products from './components/Header/Products';
+import Pricing from './components/Header/Pricing';
+import Location from './components/Header/Location';
 import Dashboard from './components/UserSettings/Dashboard';
 import Profile from './components/UserSettings/Profile';
-import Logout from './components/UserSettings/Logout';
+import Registration from './components/UserSettings/Registration';
+import Searchbar from './components/Header/Searchbar';
 
 function App() {
   return (
     <div className="App">
         <ResponsiveAppBar />
+          <Divider />
+          <Divider />
+        <Searchbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="Products" element={<Products />} />
@@ -21,7 +28,7 @@ function App() {
           <Route path="Location" element={<Location />} />
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Profile" element={<Profile />} />
-          <Route path="Logout" element={<Logout />} />
+          <Route path="Registration" element={<Registration />} />
         </Routes>
     </div>
   );

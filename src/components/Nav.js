@@ -136,7 +136,7 @@ const ResponsiveAppBar = () => {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                  
-                  <Link to={`/${setting}`}>{setting}</Link>
+                  <Link style={{textDecoration: "none", color: "black"}} to={`/${setting}`}>{setting}</Link>
                   
                   
                 </MenuItem>

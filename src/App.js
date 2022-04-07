@@ -22,7 +22,7 @@ function App() {
           <Route path="Dashboard" element={<Dashboard />} />
           <Route path="Profile" element={<Profile />} />
           <Route path="Logout" element={<Logout />} />
-          </Routes>
+        </Routes>
     </div>
   );
 }

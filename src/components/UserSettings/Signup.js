@@ -1,57 +1,110 @@
-import React from 'react'
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@material-ui/core'
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import { TextField, Button, Box, Typography } from "@material-ui/core";
+import { Field, Form, Formik } from "formik";
+import { object, string, ref } from "yup";
+
+const initialValues = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+};
+
+const validateConfirmPassword = (pass, value) => {
+
+    let error = "";
+    if (pass && value) {
+      if (pass !== value) {
+        error = "Password not matched";
+      }
+    }
+    return error;
+  };
+  
 
 const Signup = () => {
-    const paperStyle = { padding: '30px 20px', width: 300, margin: "20px auto" }
-    const headerStyle = { margin: 0 }
-    const avatarStyle = { backgroundColor: '#1bbd7e' }
-    const marginTop = { marginTop: 5 }
-
-    const welcomeMessage = () => 
-    {
-       console.log('Welcome to onion!')
-    }
-    return (
-        <Grid>
-            <Paper elevation={20} style={paperStyle}>
-                <Grid align='center'>
-                    <Avatar style={avatarStyle}>
-                        <AddCircleOutlineOutlinedIcon />
-                    </Avatar>
-                    <h2 style={headerStyle}>Sign Up</h2>
-                    <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
-                </Grid>
-                <form>
-                    <TextField fullWidth label='Username' placeholder="Enter your Username" />
-                    <TextField fullWidth label='Email' placeholder="Enter your email" />
-                    <FormControl component="fieldset" style={marginTop}>
-                        <FormLabel component="legend">Gender</FormLabel>
-                        <RadioGroup aria-label="gender" name="gender" style={{ display: 'initial' }}>
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            
-                        </RadioGroup>
-                    </FormControl>
-                    <TextField fullWidth label='Phone Number' placeholder="Enter your phone number" />
-                    <TextField fullWidth label='Password' placeholder="Enter your password" required/>
-                    <TextField fullWidth label='Confirm Password' placeholder="Confirm your password" required/>
-                    <FormControlLabel
-                        control={<Checkbox name="checkedA" />}
-                        label="I accept the terms and conditions."
-                        
-                    />
-                    <Button type='submit' variant='contained' color='primary' >Sign up</Button>
-                </form>
-            </Paper>
-        </Grid>
-    )
-}
+    return(
+        <div className="Signup">
+        <Typography variant="h4">
+        Sign up to become a onion :)
+        </Typography>
+        <Formik
+        initialValues={initialValues}
+        validationSchema={object({
+            email: string().required('Please enter Email').email('Invalid Email'),
+            name: string().required('Please enter your Name').min(2,"Name too short"),
+            password: string().required('Please enter Password').min(8,"Password should be minimum 8 Characters").uppercase(1),
+            confirmPassword: string().required('Please confirm Password').oneOf([ref('password'), null], 'Passwords must match')
+        })}
+        onSubmit={(values, formikHelpers) => {
+            console.log(values);
+            formikHelpers.resetForm();
+        }}
+        >
+        {({ errors, isValid, touched, dirty }) => (
+            <Form>
+              <Field
+                name="email"
+                type="email"
+                as={TextField}
+                variant="outlined"
+                color="primary"
+                label="Email"
+                fullWidt
+                error={Boolean(errors.email) && Boolean(touched.email)}
+                helperText={Boolean(touched.email) && errors.email}
+              />
+              <Box height={14} />
+        
+              <Field
+              name="name"
+              type="name"
+              as={TextField}
+              variant="outlined"
+              color="primary"
+              label="Name"
+              fullWidth
+              error={Boolean(errors.name) && Boolean(touched.name)}
+              helperText={Boolean(touched.name) && errors.name}
+            />
+            <Box height={14} />
+            <Field
+            name="password"
+            type="password"
+            as={TextField}
+            variant="outlined"
+            color="primary"
+            label="Password"
+            fullWidth
+            error={Boolean(errors.password) && Boolean(touched.password)}
+            helperText={Boolean(touched.password) && errors.password}
+          />
+          <Box height={14} />
+          <Field
+          name="confirmPassword"
+          type="password"
+          as={TextField}
+          variant="outlined"
+          color="primary"
+          label="Confirm Password"
+          fullWidth
+          error={Boolean(errors.password) && Boolean(touched.password)}
+          helperText={Boolean(touched.password) && errors.password}
+        />
+        <Box height={14} />
+          <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          size="large"
+          disabled={!isValid || !dirty}
+        >
+          Sign up
+        </Button>
+        </Form>
+        )}
+        </Formik>
+        </div>
+    );
+};
 
 export default Signup;

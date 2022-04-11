@@ -2,12 +2,18 @@ import { TextField, Button, Box, Typography } from "@material-ui/core";
 import { Field, Form, Formik } from "formik";
 import { object, string, ref } from "yup";
 
+import { Link, useNavigate } from "react-router-dom";
+import Dashboard from "./Dashboard";
+
 const initialValues = {
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
 };
+
+const MyLink = props => <Link to="/Dashboard" {...props} />
+
 
 // const validateConfirmPassword = (pass, value) => {
 
@@ -97,6 +103,7 @@ const Signup = () => {
           color="primary"
           size="large"
           disabled={!isValid || !dirty}
+          component={MyLink}
         >
           Sign up
         </Button>

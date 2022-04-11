@@ -9,22 +9,22 @@ const initialValues = {
     confirmPassword: ''
 };
 
-const validateConfirmPassword = (pass, value) => {
+// const validateConfirmPassword = (pass, value) => {
 
-    let error = "";
-    if (pass && value) {
-      if (pass !== value) {
-        error = "Password not matched";
-      }
-    }
-    return error;
-  };
+//     let error = "";
+//     if (pass && value) {
+//       if (pass !== value) {
+//         error = "Password not matched";
+//       }
+//     }
+//     return error;
+//   };
   
 
 const Signup = () => {
     return(
         <div className="Signup">
-        <Typography variant="h4">
+        <Typography variant="h6">
         Sign up to become a onion :)
         </Typography>
         <Formik
@@ -33,7 +33,7 @@ const Signup = () => {
             email: string().required('Please enter Email').email('Invalid Email'),
             name: string().required('Please enter your Name').min(2,"Name too short"),
             password: string().required('Please enter Password').min(8,"Password should be minimum 8 Characters").uppercase(1),
-            confirmPassword: string().required('Please confirm Password').oneOf([ref('password'), null], 'Passwords must match')
+            confirmPassword: string().required('Please retype your Password').oneOf([ref('password'), null], 'Passwords must match')
         })}
         onSubmit={(values, formikHelpers) => {
             console.log(values);
@@ -49,7 +49,7 @@ const Signup = () => {
                 variant="outlined"
                 color="primary"
                 label="Email"
-                fullWidt
+                size="small"
                 error={Boolean(errors.email) && Boolean(touched.email)}
                 helperText={Boolean(touched.email) && errors.email}
               />
@@ -62,11 +62,11 @@ const Signup = () => {
               variant="outlined"
               color="primary"
               label="Name"
-              fullWidth
+              size="small"
               error={Boolean(errors.name) && Boolean(touched.name)}
               helperText={Boolean(touched.name) && errors.name}
             />
-            <Box height={14} />
+            <Box height={10} />
             <Field
             name="password"
             type="password"
@@ -74,11 +74,11 @@ const Signup = () => {
             variant="outlined"
             color="primary"
             label="Password"
-            fullWidth
+            size="small"
             error={Boolean(errors.password) && Boolean(touched.password)}
             helperText={Boolean(touched.password) && errors.password}
           />
-          <Box height={14} />
+          <Box height={10} />
           <Field
           name="confirmPassword"
           type="password"
@@ -86,11 +86,11 @@ const Signup = () => {
           variant="outlined"
           color="primary"
           label="Confirm Password"
-          fullWidth
+          size="small"
           error={Boolean(errors.password) && Boolean(touched.password)}
           helperText={Boolean(touched.password) && errors.password}
         />
-        <Box height={14} />
+        <Box height={10} />
           <Button
           type="submit"
           variant="contained"

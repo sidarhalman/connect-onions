@@ -1,0 +1,25 @@
+{
+  "name": "connect-onions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "node index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidarhalman/connect-onions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sidarhalman/connect-onions/issues"
+  },
+  "homepage": "https://github.com/sidarhalman/connect-onions#readme",
+  "devDependencies": {
+    "concurrently": "^7.1.0"
+  }
+}

@@ -1,23 +1,42 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
+import { Route, Routes} from 'react-router';
+import { Divider } from '@material-ui/core';
+
 import './App.css';
+import ResponsiveAppBar from "./components/Header/Nav";
+import Home from './components/Header/Home';
+import Products from './components/Header/Products';
+import Users from './components/Header/Users';
+import Location from './components/Header/Location';
+import Dashboard from './components/UserSettings/Dashboard';
+import Profile from './components/UserSettings/Profile';
+import Signup from './components/UserSettings/Signup';
+import Searchbar from './components/Header/Searchbar';
+import Questions from './components/Header/Questions';
 
 function App() {
+  
+  const [ showSearchbar, setSeachbar] = useState(false);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <ResponsiveAppBar />
+          <Divider />
+          <Divider />
+        
+        <div> {showSearchbar && <Searchbar /> } </div>
+        
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="Products" element={<Products />} />
+          <Route path="Users" element={<Users />} />
+          <Route path="Location" element={<Location />} />
+          <Route path="Dashboard" element={<Dashboard />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="Signup" element={<Signup />} />
+          <Route path='Questions' element={<Questions />} />
+          </Routes>
     </div>
   );
 }

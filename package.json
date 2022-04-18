@@ -1,7 +1,6 @@
 {
   "name": "connect-onions",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "server": "node index.js",
@@ -21,5 +20,6 @@
   "homepage": "https://github.com/sidarhalman/connect-onions#readme",
   "devDependencies": {
     "concurrently": "^7.1.0"
-  }
+  },
+  "description": ""
 }

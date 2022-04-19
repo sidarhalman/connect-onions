@@ -24,6 +24,7 @@
   "description": "",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
+    "clear": "^0.1.0",
     "formik": "^2.2.9",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",

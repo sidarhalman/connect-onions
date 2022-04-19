@@ -1,14 +1,14 @@
 import React, {useState } from 'react';
 import Searchbar from './Searchbar';
-import { Card, CardContent, Typography, Divider, Button } from '@material-ui/core';
+import { Card, CardContent, Typography, Divider, Button , Box, Grid, Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
 import { Field, Form, Formik, FormikConfig, FormikValues } from 'formik';
 import { CheckboxWithLabel, TextField } from 'formik-mui'
 import { mixed, number, object, array } from 'yup';
 
+const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
-const Products = () => {
-    
-return (
+export default function Products() {
+    return (
     
     <div className='App'>
     <h1>products</h1>
@@ -17,13 +17,7 @@ return (
         <Card>
             <CardContent>
             <FormikStepper
-            validationSchema={object({
-                PaymentMethod: array().min(1, "Pick at least 1 item")
-                .of(number().required("This field is required.")),
-                otherwise: array()
-        
-            })}
-            initialValues={{
+                initialValues={{
                 ProductName: '',
                 Price: '',
                 ProductDescription: '',
@@ -32,18 +26,25 @@ return (
                 PaymentBank: '',
                 PaymentFree: '',
                 ProductPhoto : []
-            }} onSubmit={() =>{}}>
+            }} onSubmit={async (values) => {
+                await sleep(3000);
+                console.log('values', values);
+            }}>
            
-            
             <FormikStep>
+            <Box paddingBottom={2}>
             <Field name="ProductName" component={TextField} label="Product Name" />
+            </Box>
+            <Box paddingBottom={2}>
             <Field name="Price" component={TextField} label="Price" />
+            </Box>
             </FormikStep>
-                <FormikStep>
+            <Box paddingBottom={2}>
                 <Field name="ProductDescription" component={TextField} label="Product Description" />
-                </FormikStep>
-
-                    <FormikStep>
+                </Box>
+                
+                <FormikStep>
+                <Box paddingBottom={2}>
                     <label>
                     <Field name="PaymentCash" type='checkbox' component={CheckboxWithLabel} Label={{ label: 'Cash'}}  />
                     </label>   
@@ -56,6 +57,7 @@ return (
                     <label>
                     <Field name="PaymentFree" type='checkbox' component={CheckboxWithLabel} Label={{ label: 'For Free'}}  />
                     </label> 
+                    </Box>
                     </FormikStep>
            
             <FormikStep>
@@ -80,42 +82,96 @@ return (
 // }
 
 
+
+
 export function FormikStep({ children}) {
-return <>{children}</>
+return (
+    <div>{children}</div>
+)
 }
 
+export function FormikStepper({ children, ...props }) {
+    const childrenArray = React.Children.toArray(children);
+    const [step, setStep] = useState(0);
+    const currentChild = childrenArray[step];
+    const [completed, setCompleted] = useState(false);
+  
+    function isLastStep() {
+      return step === childrenArray.length - 1;
+    }
 
-export function FormikStepper({ children, ...props}) {
-   const childrenArray = React.Children.toArray(children);
-   const [step, setStep] = useState(0);
+   
 
-   const currentChild = childrenArray[step];
-
-function isLastStep() {
-    return step === childrenArray.length - 1;
-}
-
-   return (
-    <Formik {...props} onSubmit={async (values, helpers) => {
-        if(isLastStep()) {
-            await props.onSubmit(values, helpers);
-        }else {
-            setStep(s => s + 1);
-        }
-    }}
-
-        {...props}
-     >
+    return (
+        <Formik
+          {...props}
+          validationSchema={currentChild.props.validationSchema}
+          onSubmit={async (values, helpers) => {
+            if (isLastStep()) {
+              await props.onSubmit(values, helpers);
+              setCompleted(true);
+            } else {
+              setStep((s) => s + 1);
+            }
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form autoComplete="off">
+              <Stepper alternativeLabel activeStep={step}>
+                {childrenArray.map((child, index) => (
+                  <Step
+                    key={child.props.label}
+                    completed={step > index || completed}
+                  >
+                    <StepLabel>{child.props.label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
     
-     <Form autoComplete='off'>{currentChild}
-     {step > 0 ? <Button onCLick={() => setStep(s=> s-1)}>Back</Button> : null}
-     <Button type="submit">{isLastStep() ? 'Submit' : 'Next'}</Button>
-     
-     </Form>
-     </Formik>
-     )
-}
+              {currentChild}
+    
+              <Grid container spacing={2}>
+                {step > 0 ? (
+                  <Grid item>
+                    <Button
+                      disabled={isSubmitting}
+                      variant="contained"
+                      color="primary"
+                      onClick={() => setStep((s) => s - 1)}
+                    >
+                      Back
+                    </Button>
+                  </Grid>
+                ) : null}
+                <Grid item>
+                  <Button
+                    startIcon={
+                      isSubmitting ? <CircularProgress size="1rem" /> : null
+                    }
+                    disabled={isSubmitting}
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                  >
+                    {isSubmitting ? "Submitting" : isLastStep() ? "Submit" : "Next"}
+                  </Button>
+                </Grid>
+              </Grid>
+            </Form>
+          )}
+        </Formik>
+      );
+    }
+    
 
 
 
-export default Products;
+
+
+
+// validationSchema={object({
+//     PaymentMethod: array().min(1, "Pick at least 1 item")
+//     .of(number().required("This field is required.")),
+//     otherwise: array()
+
+// })}

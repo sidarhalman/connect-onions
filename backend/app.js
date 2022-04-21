@@ -1,7 +1,7 @@
-require('dotenv').config();
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser =  require('body-parser');
+require('../.node_modules/dotenv/lib/main').config();
+const express = require('../.node_modules/express');
+const morgan = require('../.node_modules/morgan');
+const bodyParser =  require('../.node_modules/body-parser');
 const app = express();
 
 const userRouter = require('./routes/userRoutes');

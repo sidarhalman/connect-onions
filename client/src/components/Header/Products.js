@@ -1,9 +1,10 @@
 import React, {useState } from 'react';
 import Searchbar from './Searchbar';
-import { Card, CardContent, Typography, Divider, Button , Box, Grid, Step, StepLabel, Stepper, CircularProgress} from '@material-ui/core';
+import { Card, CardContent, Typography, Divider, Button , Box, Grid, Step, StepLabel, Stepper, CircularProgress, } from '@material-ui/core';
 import { Field, Form, Formik, FormikConfig, FormikValues } from 'formik';
-import { CheckboxWithLabel, TextField } from 'formik-mui'
+import { CheckboxWithLabel,TextField } from 'formik-mui'
 import { mixed, number, object, array } from 'yup';
+
 
 const sleep = (time) => new Promise((acc) => setTimeout(acc, time));
 
@@ -40,8 +41,8 @@ export default function Products() {
             </Box>
             </FormikStep>
             <Box paddingBottom={2}>
-                <Field name="ProductDescription" component={TextField} label="Product Description" />
-                </Box>
+            <Field name="ProductDescription" component={TextField}          label="Product Description" />
+             </Box>
                 
                 <FormikStep>
                 <Box paddingBottom={2}>
@@ -80,9 +81,6 @@ export default function Products() {
 
 // export interface FormikStepProps extends Pick <FormikConfig<FormikValues>, 'children' | 'validationSchema'> {
 // }
-
-
-
 
 export function FormikStep({ children}) {
 return (
@@ -132,7 +130,7 @@ export function FormikStepper({ children, ...props }) {
     
               <Grid container spacing={2}>
                 {step > 0 ? (
-                  <Grid item>
+                  <Grid item xs={2}>
                     <Button
                       disabled={isSubmitting}
                       variant="contained"

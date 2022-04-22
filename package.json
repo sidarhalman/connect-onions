@@ -23,16 +23,28 @@
   },
   "description": "",
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
     "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.2",
+    "basic-auth": "^2.0.1",
     "body-parser": "^1.20.0",
     "clear": "^0.1.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "formik": "^2.2.9",
+    "formik-mui": "^4.0.0-alpha.3",
+    "material-ui-search-bar": "^1.0.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "webpack": "^5.72.0",
     "yup": "^0.32.11"
   }
 }

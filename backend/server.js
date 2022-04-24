@@ -5,10 +5,12 @@ const port = 5000;
 
 app.use( '/static', express.static(path.join(__dirname, '../dist'), { index: false }));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res) => 
+{
     res.status(200).sendFile( path.join(__dirname, '../dist', 'index.html'));
 });
 
-app.listen(port, () => {
+app.listen(port, () => 
+{
     console.log( ` server listening on ${port}` );
 });

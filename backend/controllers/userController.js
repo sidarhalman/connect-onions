@@ -20,8 +20,9 @@ exports.createUser = (req, res) =>
 {
     const user = new User(
         {
+            email: req.body.email,
             name: req.body.name,
-            surname: req.body.surname
+            password: req.body.password
         },
     );
     user.save()
@@ -33,6 +34,7 @@ exports.createUser = (req, res) =>
         {
             res.json({ message : err }); 
         });
+    console.log(req.body);
 };
 
 exports.updateUser = (req, res) => 

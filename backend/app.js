@@ -1,6 +1,16 @@
 const express = require('express');
+const mongoose =require('mongoose');
 const path = require('path');
 const app = express();
+
+mongoose.connect(
+    process.env.DB_URL,
+    {
+        useNewUrlParser:true,
+        useUnifiedTopology:true
+    },
+    () => console.log('Database connected!')
+);
 
 app.use( '/static', express.static(path.join(__dirname, '../dist'), { index: false }));
 

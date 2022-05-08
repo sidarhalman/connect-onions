@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const { object } = require('yup');
 
 const userSchema = mongoose.Schema(
     {
         email : {
             type : String,
-            required : true  
+            required : true,
+            unique: true 
         },
         name : {
             type : String,
@@ -17,7 +19,11 @@ const userSchema = mongoose.Schema(
         date : {
             type : String,
             default : Date.now
-        }        
+        },
+        items: {
+            type: Array,
+            default: []
+        }
     }
 );
 

@@ -20,23 +20,7 @@ function App() {
   
   return (
     <div className="App">
-        <ResponsiveAppBar />
-          <Divider />
-          <Divider />
-        
-        <div> {showSearchbar && <Searchbar /> } </div>
-        
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Products" element={<Products />} />
-          <Route path="Users" element={<Users />} />
-          <Route path="Location" element={<Location />} />
-          <Route path="Dashboard" element={<Dashboard />} />
-          <Route path="Profile" element={<Profile />} />
-          <Route path="Signup" element={<Signup />} />
-          <Route path='Questions' element={<Questions />} />
-          </Routes>
+      <h1>We Start!!</h1>
     </div>
   );
 }

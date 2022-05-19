@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 
+import Header from './components/Header';
+import Body from './components/Body';
+
 import './App.css';
 
 function App() {
-  
-  const [ showSearchbar, setSeachbar] = useState(false);
-  
   return (
-    <div className="App">
-      <h1>We Start!!</h1>
+    <div  className="App">
+      <Header text='header from Probs' />
+      <Body/>
     </div>
   );
 }
